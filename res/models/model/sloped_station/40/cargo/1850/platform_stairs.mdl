@@ -1,0 +1,11 @@
+local slopedstation = require "slopedstation"
+local currentPath = debug.getinfo(1).source
+
+local modelPath, slope = slopedstation.extractModel(currentPath)
+local buildingFile = assert(loadfile(modelPath))
+buildingFile()
+
+local originalData = data
+function data()
+    return slopedstation.treatStairs(slope)(originalData())
+end
