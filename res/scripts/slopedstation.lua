@@ -118,7 +118,7 @@ function slopedstation.updateFn(stationConfig, stationBuilding, platformConfig, 
     result.models = func.map(result.models, mapModel)
     
     local mapTerrainList = function(ta)
-        local mapTerrain = function(t) return (coor.tuple2Vec(t) .. m * mz).toTuple() end
+        local mapTerrain = function(t) return (coor.tuple2Vec(t) .. m * mz):toTuple() end
         local mapFaces = function(f) return func.map(f, mapTerrain) end
         ta.faces = func.map(ta.faces, mapFaces)
         return ta
@@ -140,8 +140,8 @@ function slopedstation.generalTreat(m, nodeMatch)
     return function(result)
             
             local function treat(keep, rotate)
-                local kepPoint = keep.toTuple()
-                local rotPoint = (rotate .. m).toTuple()
+                local kepPoint = keep:toTuple()
+                local rotPoint = (rotate .. m):toTuple()
                 local vec = {rotPoint[1] - kepPoint[1], 0, 0}
                 return table.unpack(laneutil.makeLanes({{kepPoint, rotPoint, vec, vec, 1.5}}))
             end
